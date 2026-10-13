@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Листва — комнатные растения в горшках на выбор. Доставка по России, гарантия приживаемости 14 дней.">
+<title>Листва — комнатные растения с доставкой</title>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#E7EDF0; --card:#F5F8F9; --ink:#12262B; --muted:#50666D; --line:#C5D2D7;
+  --accent:#3345E0; --on-accent:#FFFFFF; --leaf:#2F7D5B;
+  --r-lg:22px; --r-md:14px;
+  --font-display:'Unbounded','Onest',system-ui,sans-serif;
+  --font-body:'Onest',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1A1E; --card:#162A30; --ink:#E6EEF0; --muted:#9BB0B6; --line:#27404A;
+    --accent:#8794FF; --on-accent:#0B1220; --leaf:#6CC49A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1A1E; --card:#162A30; --ink:#E6EEF0; --muted:#9BB0B6; --line:#27404A;
+  --accent:#8794FF; --on-accent:#0B1220; --leaf:#6CC49A; color-scheme:dark;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:1rem;line-height:1.55}
+body:has(dialog[open]){overflow:hidden}
+h1,h2,h3{text-wrap:balance;hyphens:auto}
+p{margin:0}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* header */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:1.2rem;color:var(--ink);text-decoration:none}
+.logo svg{width:26px;height:26px;color:var(--leaf)}
+.nav{display:none;gap:28px}
+.nav a{color:var(--muted);text-decoration:none;font-weight:500}
+.nav a:hover{color:var(--ink)}
+@media(min-width:720px){.nav{display:flex}}
+.cart-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-weight:600;cursor:pointer}
+.cart-btn svg{width:20px;height:20px}
+.count{min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--accent);color:var(--on-accent);font-size:.78rem;display:inline-grid;place-items:center}
+.count[hidden]{display:none}
+
+/* hero */
+.hero{display:grid;gap:28px;align-items:center;padding-top:32px;padding-bottom:48px}
+@media(min-width:900px){.hero{grid-template-columns:1fr 1.05fr;gap:56px;padding-top:56px;padding-bottom:72px}}
+h1{font-family:var(--font-display);font-weight:600;font-size:clamp(1.7rem,4.6vw,2.9rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 18px}
+.lead{font-size:1.1rem;color:var(--muted);max-width:34em}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.facts-list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:12px}
+.facts-list li{padding-left:14px;border-left:3px solid var(--leaf)}
+.hero-conf .stage{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 24px;border-radius:999px;border:1.5px solid var(--accent);background:var(--accent);color:var(--on-accent);font-weight:600;font-size:1rem;text-decoration:none;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.small{min-height:40px;padding:0 16px;font-size:.92rem}
+.btn.wide{width:100%}
+.link{background:none;border:0;padding:6px 0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:.9rem}
+
+/* configurator */
+.conf{display:grid;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.stage{--pot:#3345E0;background:color-mix(in srgb,var(--pot) 28%,var(--card));transition:background-color .35s;display:grid;place-items:end center;padding:22px 20px 6px}
+.art{width:min(100%,340px)}
+.art svg,.card-media svg,.thumb svg{display:block;width:100%;height:auto}
+.panel{padding:18px 20px 22px;display:grid;gap:14px;align-content:start}
+.p-name{font-family:var(--font-display);font-weight:600;font-size:1.25rem;line-height:1.2;margin:0}
+.latin{font-style:italic;color:var(--muted);font-size:.9rem}
+.blurb{color:var(--ink)}
+.swatches{border:0;margin:0;padding:0;min-width:0}
+.swatches legend{padding:0;margin-bottom:10px;font-size:.92rem;color:var(--muted)}
+.swatches strong{color:var(--ink);font-weight:600}
+.sw-row{display:flex;flex-wrap:wrap;gap:12px}
+.sw{width:40px;height:40px;padding:0;border-radius:50%;background:var(--c);border:1.5px solid color-mix(in srgb,var(--ink) 22%,transparent);cursor:pointer}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--card),0 0 0 4.5px var(--ink)}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.price{font-weight:600;font-size:1.35rem}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:.95rem}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0}
+.conf.wide{grid-template-columns:1fr}
+@media(min-width:720px){.conf.wide{grid-template-columns:1fr 1fr}.conf.wide .stage{padding-top:48px}.conf.wide .panel{padding:48px 28px 28px}}
+
+/* catalog */
+.section{padding:48px 0}
+.title{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,3.4vw,2rem);letter-spacing:-.01em;margin:0}
+.cat-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px;margin-bottom:20px}
+.found{color:var(--muted);font-size:.95rem}
+.controls{display:grid;gap:12px;margin-bottom:24px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.input,.select{font:inherit;font-size:1rem;min-height:44px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:0 18px}
+.input{flex:1 1 220px}
+.select{padding-right:12px}
+.chip{font:inherit;font-weight:500;white-space:nowrap;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.toggle{display:inline-flex;align-items:center;gap:10px;min-height:40px;margin-left:4px;cursor:pointer;font-weight:500}
+.toggle input{width:20px;height:20px;accent-color:var(--leaf)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media(min-width:720px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}}
+@media(min-width:1040px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.card-media{--pot:#3345E0;display:block;width:100%;border:0;padding:14px 12px 0;background:color-mix(in srgb,var(--pot) 26%,var(--card));cursor:pointer}
+.card-body{display:flex;flex-direction:column;gap:4px;padding:12px 14px 14px;flex:1}
+.card h3{font-family:var(--font-display);font-weight:500;font-size:.92rem;line-height:1.25;margin:0}
+.card .latin{font-size:.82rem}
+.tags{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0;padding:0}
+.tags li{font-size:.76rem;border:1px solid var(--line);border-radius:999px;padding:1px 9px;color:var(--muted)}
+.tags .pet{border-color:var(--leaf);color:var(--leaf)}
+.card-foot{margin-top:auto;padding-top:12px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.card-foot .price{font-size:1.05rem}
+.empty{grid-column:1/-1;text-align:center;padding:48px 16px;color:var(--muted);display:grid;gap:14px;justify-items:center}
+
+/* info */
+.info{display:grid;gap:28px;margin-top:24px}
+@media(min-width:800px){.info{grid-template-columns:repeat(3,1fr);gap:36px}}
+.info h3{font-family:var(--font-display);font-weight:500;font-size:1.05rem;margin:0 0 10px;padding-top:14px;border-top:2px solid var(--ink)}
+.info p{color:var(--muted)}
+.faq{max-width:760px;margin-top:20px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 36px 18px 0;font-weight:600;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:1.5rem;font-weight:400;color:var(--muted)}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{padding:0 0 18px;color:var(--muted)}
+.site-footer{margin-top:32px;border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:.92rem}
+
+/* dialogs */
+dialog{border:0;padding:0;background:var(--bg);color:var(--ink);border-radius:var(--r-lg)}
+dialog::backdrop{background:rgba(6,18,22,.58)}
+#detail{width:min(920px,calc(100vw - 24px));max-width:none;max-height:calc(100dvh - 24px);overflow:hidden;position:fixed}
+.dlg-scroll{overflow:auto;max-height:calc(100dvh - 24px)}
+#detail .conf{border:0;border-radius:0}
+.close{position:absolute;top:12px;right:12px;z-index:3;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.close svg{width:18px;height:18px}
+#cart{width:100%;max-width:440px;height:100dvh;max-height:none;margin:0 0 0 auto;border-radius:var(--r-lg) 0 0 var(--r-lg)}
+#cart[open]{display:flex;flex-direction:column}
+.sheet{flex:1;min-height:0;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px}
+.sheet-head .close{position:static}
+#cart-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.lines{flex:1;overflow:auto;list-style:none;margin:0;padding:4px 20px 16px;display:grid;align-content:start;gap:14px}
+.line{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:start}
+.thumb{--pot:#3345E0;background:color-mix(in srgb,var(--pot) 26%,var(--card));border-radius:14px;padding:6px 4px 0}
+.line-name{font-weight:600;line-height:1.3}
+.line-sub{color:var(--muted);font-size:.88rem}
+.qty{display:inline-flex;align-items:center;gap:4px;margin-top:8px;border:1.5px solid var(--line);border-radius:999px}
+.qty button{width:36px;height:36px;border:0;background:transparent;color:var(--ink);font-size:1.2rem;cursor:pointer;border-radius:50%}
+.qty span{min-width:24px;text-align:center;font-weight:600}
+.line-end{display:grid;justify-items:end;gap:6px}
+.line-price{font-weight:600}
+.sum{padding:16px 20px 20px;border-top:1px solid var(--line);display:grid;gap:12px;background:var(--card)}
+.ship-note{font-size:.92rem;color:var(--muted)}
+.ship-note.ok{color:var(--leaf);font-weight:500}
+.bar-track{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar-fill{height:100%;background:var(--leaf);border-radius:3px;transition:width .3s}
+.totals{display:grid;gap:4px;margin:0}
+.totals div{display:flex;justify-content:space-between}
+.totals dt{color:var(--muted)}
+.totals dd{margin:0}
+.totals .grand{font-weight:600;font-size:1.15rem;padding-top:6px}
+.totals .grand dt{color:var(--ink)}
+.cart-msg{padding:40px 24px;display:grid;gap:14px;justify-items:start}
+.cart-msg h3{font-family:var(--font-display);font-weight:600;font-size:1.2rem;margin:0}
+.cart-msg p{color:var(--muted)}
+.checkout{align-content:start;gap:16px}
+.checkout h3{font-family:var(--font-display);font-weight:500;font-size:1.05rem;margin:0}
+.field{display:grid;gap:6px;font-weight:500}
+.field input{font:inherit;font-size:1rem;min-height:48px;width:100%;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:0 14px}
+.note{color:var(--muted);font-size:.88rem}
+
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60;max-width:calc(100vw - 32px);text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="Листва, на главную">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 29V15" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M16 17C16 9 11 5 4 5c0 8 4 12 12 12Z" fill="currentColor"/><path d="M16 14c0-6 4-10 12-10 0 7-4 10-12 10Z" fill="currentColor" opacity=".6"/></svg>
+      Листва
+    </a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#catalog">Каталог</a><a href="#delivery">Доставка</a><a href="#faq">Вопросы</a>
+    </nav>
+    <button class="cart-btn" id="open-cart" type="button" aria-label="Открыть корзину">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span>Корзина</span><span class="count" id="count" hidden>0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="wrap hero">
+    <div class="hero-copy">
+      <h1>Растения, которые приживутся у вас дома</h1>
+      <p class="lead">Выберите растение и горшок к нему. Привезём в защитной упаковке с картой ухода, а если растение не приживётся за 14 дней, заменим его.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#catalog">Смотреть каталог</a>
+        <a class="btn ghost" href="#delivery">Доставка и гарантия</a>
+      </div>
+      <ul class="facts-list">
+        <li>Доставка по России от 2 дней</li>
+        <li>Бесплатно при заказе от 3 000 ₽</li>
+        <li>Карта ухода в каждой посылке</li>
+      </ul>
+    </div>
+    <div class="hero-conf" id="hero-conf"></div>
+  </section>
+
+  <section class="wrap section" id="catalog">
+    <div class="cat-head">
+      <h2 class="title">Каталог</h2>
+      <p class="found" id="found" aria-live="polite"></p>
+    </div>
+    <div class="controls">
+      <div class="row">
+        <input class="input" id="q" type="search" placeholder="Название растения" aria-label="Поиск по названию" autocomplete="off">
+        <select class="select" id="sort" aria-label="Сортировка">
+          <option value="pop">Сначала популярные</option>
+          <option value="asc">Сначала дешёвые</option>
+          <option value="desc">Сначала дорогие</option>
+        </select>
+      </div>
+      <div class="row" id="chips" role="group" aria-label="Освещение"></div>
+      <div class="row">
+        <label class="toggle"><input type="checkbox" id="pets"><span>Безопасно для питомцев</span></label>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="wrap section" id="delivery">
+    <h2 class="title">Доставка и гарантия</h2>
+    <div class="info">
+      <div><h3>Как упаковываем</h3><p>Растение стоит в горшке, земля закреплена, листья защищены бумагой. Коробку подбираем по высоте растения.</p></div>
+      <div><h3>Сроки и стоимость</h3><p>По России от 2 дней. Доставка стоит 350 ₽, а при заказе от 3 000 ₽ она бесплатная.</p></div>
+      <div><h3>Если не прижилось</h3><p>В течение 14 дней пришлите фото растения. Мы заменим его или вернём деньги.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="faq">
+    <h2 class="title">Частые вопросы</h2>
+    <div class="faq">
+      <details><summary>Что выбрать, если я часто забываю про полив?</summary><p>Сансевиерию, замиокулькас или суккуленты. Они спокойно переживают пропущенную неделю, а то и две.</p></details>
+      <details><summary>Как понять, хватит ли растению света?</summary><p>Тень: дальше двух метров от окна. Полутень: рядом с окном, но без прямого солнца. Яркий свет: подоконник на южной или западной стороне.</p></details>
+      <details><summary>Опасны ли растения для кошек и собак?</summary><p>Включите фильтр «Безопасно для питомцев», и в каталоге останутся только безопасные растения. Остальные лучше держать вне досягаемости: при поедании они могут вызвать расстройство.</p></details>
+      <details><summary>Можно ли выбрать другой горшок?</summary><p>Да. Цвет горшка выбирается на карточке растения до добавления в корзину. Размер мы подбираем под растение.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">Листва, демо-витрина. Заказы никуда не отправляются, оплата не подключена.</div>
+</footer>
+
+<dialog id="detail" aria-labelledby="d-title">
+  <button class="close" type="button" id="detail-close" aria-label="Закрыть">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="dlg-scroll" id="detail-body"></div>
+</dialog>
+
+<dialog id="cart" aria-labelledby="cart-title">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2 class="title" id="cart-title" style="font-size:1.4rem">Корзина</h2>
+      <button class="close" type="button" data-act="close" aria-label="Закрыть корзину">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div id="cart-body"></div>
+  </div>
+</dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(()=>{
+'use strict';
+const $=(s,r=document)=>r.querySelector(s);
+const D2R=Math.PI/180;
+const f1=n=>+n.toFixed(1);
+const fmt=n=>n.toLocaleString('ru-RU')+'\u00A0₽';
+
+/* ---------- data ---------- */
+const POTS=[
+  {k:'cobalt',n:'Кобальт',c:'#3345E0'},
+  {k:'butter',n:'Масло',c:'#F0CB5B'},
+  {k:'blush',n:'Румянец',c:'#F2AEB9'},
+  {k:'mint',n:'Мята',c:'#9AD6BC'},
+  {k:'graphite',n:'Графит',c:'#2E3D43'},
+  {k:'chalk',n:'Мел',c:'#EEF0EA'}
+];
+const potBy=k=>POTS.find(p=>p.k===k)||POTS[0];
+const LIGHT={shade:'Тень',part:'Полутень',sun:'Яркий свет'};
+
+const PRODUCTS=[
+  {id:'monstera',type:'monstera',seed:11,name:'Монстера дырчатая',latin:'Monstera deliciosa',light:'part',size:'L',h:'около 80 см',pets:false,petsText:'Токсична при поедании',care:'Раз в 7–10 дней, когда верхний слой земли подсох',price:3400,pot:'cobalt',blurb:'Крупные резные листья. Любит рассеянный свет и тёплый воздух.'},
+  {id:'sansevieria',type:'sansevieria',seed:12,name:'Сансевиерия «Щучий хвост»',latin:'Dracaena trifasciata',light:'shade',size:'M',h:'около 60 см',pets:false,petsText:'Слабо токсична при поедании',care:'Раз в 2–3 недели',price:1900,pot:'graphite',blurb:'Почти не требует ухода: переносит тёмные углы и забытый полив.'},
+  {id:'pilea',type:'pilea',seed:13,name:'Пилея пеперомиевидная',latin:'Pilea peperomioides',light:'part',size:'S',h:'около 25 см',pets:true,petsText:'Безопасна',care:'Раз в неделю',price:700,pot:'blush',blurb:'Круглые листья-«монетки» и много «деток», которые можно пересадить.'},
+  {id:'zz',type:'zz',seed:14,name:'Замиокулькас',latin:'Zamioculcas zamiifolia',light:'shade',size:'M',h:'около 55 см',pets:false,petsText:'Токсичен при поедании',care:'Раз в 2–3 недели',price:2600,pot:'chalk',blurb:'Глянцевые листья и запас воды в клубнях. Простит пропущенный месяц.'},
+  {id:'pothos',type:'pothos',seed:15,name:'Эпипремнум золотой',latin:'Epipremnum aureum',light:'shade',size:'S',h:'25 см и плети',pets:false,petsText:'Токсичен при поедании',care:'Раз в 7–10 дней',price:800,pot:'butter',blurb:'Свисающие плети: подойдёт для полки, шкафа или подвесного кашпо.'},
+  {id:'spider',type:'spider',seed:16,name:'Хлорофитум',latin:'Chlorophytum comosum',light:'part',size:'S',h:'около 30 см',pets:true,petsText:'Безопасен',care:'Раз в неделю',price:900,pot:'mint',blurb:'Быстро растёт и даёт «деток», их можно пересадить в новые горшки.'},
+  {id:'fiddle',type:'fiddle',seed:17,name:'Фикус лирата',latin:'Ficus lyrata',light:'sun',size:'L',h:'около 110 см',pets:false,petsText:'Токсичен при поедании',care:'Раз в 10 дней, раз в месяц поворачивайте к свету',price:4900,pot:'graphite',blurb:'Крупные волнистые листья на прямом стволе. Не любит сквозняки и перестановки.'},
+  {id:'aloe',type:'aloe',seed:18,name:'Алоэ вера',latin:'Aloe vera',light:'sun',size:'M',h:'около 40 см',pets:false,petsText:'Токсично при поедании',care:'Раз в 2 недели',price:1100,pot:'butter',blurb:'Мясистые листья хранят воду. Любит солнце и редкий полив.'},
+  {id:'calathea',type:'calathea',seed:19,name:'Калатея орнатa',latin:'Calathea ornata',light:'shade',size:'M',h:'около 50 см',pets:true,petsText:'Безопасна',care:'Раз в 4–5 дней мягкой водой',price:1800,pot:'blush',blurb:'Полосатые листья на ночь складываются вверх. Нужен влажный воздух.'},
+  {id:'fern',type:'fern',seed:20,name:'Нефролепис',latin:'Nephrolepis exaltata',light:'part',size:'M',h:'около 45 см',pets:true,petsText:'Безопасен',care:'Раз в 3–4 дня, земля слегка влажная',price:1200,pot:'cobalt',blurb:'Пушистая крона из перистых листьев. Любит влажный воздух.'},
+  {id:'echeveria',type:'rosette',seed:21,name:'Эхеверия',latin:'Echeveria elegans',light:'sun',size:'S',h:'около 12 см',pets:true,petsText:'Безопасна',care:'Раз в 2 недели, воду в розетку не лить',price:600,pot:'mint',blurb:'Розетка из плотных листьев. Подойдёт для самого солнечного подоконника.'},
+  {id:'cactus',type:'cactus',seed:22,name:'Цереус перуанский',latin:'Cereus repandus',light:'sun',size:'S',h:'около 25 см',pets:false,petsText:'Колючки: держите подальше от животных',care:'Раз в 2–3 недели, зимой реже',price:700,pot:'chalk',blurb:'Колючий, но неприхотливый: два года без пересадки.'}
+];
+const PBY=Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
+const FREE=3000, SHIP=350;
+
+/* ---------- illustration ---------- */
+const rnd=seed=>{let a=seed>>>0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
+const hex2rgb=h=>{h=h.replace('#','');return[0,2,4].map(i=>parseInt(h.substr(i,2),16))};
+const mix=(a,b,t)=>{const A=hex2rgb(a),B=hex2rgb(b);return'#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('')};
+
+function quad(p0,p1,p2,t){
+  const u=1-t;
+  const x=u*u*p0[0]+2*u*t*p1[0]+t*t*p2[0], y=u*u*p0[1]+2*u*t*p1[1]+t*t*p2[1];
+  const dx=2*u*(p1[0]-p0[0])+2*t*(p2[0]-p1[0]), dy=2*u*(p1[1]-p0[1])+2*t*(p2[1]-p1[1]);
+  return{x,y,a:Math.atan2(dx,-dy)/D2R};
+}
+const q=(p0,p1,p2)=>`M${f1(p0[0])} ${f1(p0[1])}Q${f1(p1[0])} ${f1(p1[1])} ${f1(p2[0])} ${f1(p2[1])}`;
+function L(x,y,ang,len,wid,fill,vein,stroke,extra=''){
+  const v=vein?`<path d="M0 -3V${f1(-len*.88)}" stroke="${vein}" stroke-width="1.5" stroke-linecap="round" fill="none"/>`:'';
+  const s=stroke?` stroke="${stroke}" stroke-width="1.8" stroke-linejoin="round"`:'';
+  return`<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(ang)})"><path d="M0 0C${f1(wid)} ${f1(-len*.25)} ${f1(wid)} ${f1(-len*.7)} 0 ${f1(-len)}C${f1(-wid)} ${f1(-len*.7)} ${f1(-wid)} ${f1(-len*.25)} 0 0Z" fill="${fill}"${s}/>${v}${extra}</g>`;
+}
+function mLeaf(x,y,ang,len,fill){
+  const w=len*.52;let cuts='';
+  [.32,.5,.68].forEach(k=>[-1,1].forEach(sd=>{cuts+=`<path d="M0 ${f1(-len*k)}L${f1(sd*w*.8)} ${f1(-len*k+len*.07)}" stroke="#1B4733" stroke-width="2.4" stroke-linecap="round"/>`}));
+  return`<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(ang)})"><path d="M0 0C${f1(-w*.9)} ${f1(-len*.05)} ${f1(-w*1.15)} ${f1(-len*.55)} ${f1(-w*.3)} ${f1(-len*.9)}C${f1(-w*.1)} ${f1(-len*.97)} 0 ${f1(-len)} 0 ${f1(-len)}C0 ${f1(-len)} ${f1(w*.1)} ${f1(-len*.97)} ${f1(w*.3)} ${f1(-len*.9)}C${f1(w*1.15)} ${f1(-len*.55)} ${f1(w*.9)} ${f1(-len*.05)} 0 0Z" fill="${fill}"/><path d="M0 -2V${f1(-len*.9)}" stroke="#1B4733" stroke-width="1.6" stroke-linecap="round"/>${cuts}</g>`;
+}
+const tip=(a,h)=>[100+h*Math.sin(a*D2R),164-h*Math.cos(a*D2R)];
+const stem=(p0,p1,p2,c,w)=>`<path d="${q(p0,p1,p2)}" stroke="${c}" stroke-width="${w}" fill="none" stroke-linecap="round"/>`;
+
+const PLANTS={
+  monstera(r){
+    let s='';
+    [[-58,50],[58,46],[-34,72],[36,64],[-12,88],[14,78]].forEach(([a,h],i)=>{
+      const[tx,ty]=tip(a,h);
+      s+=stem([100,164],[100+(tx-100)*.2,164-h*.65],[tx,ty],'#2A5E44',3);
+      s+=mLeaf(tx,ty,a*1.15+(r()-.5)*12,44+r()*8,i%2?'#2F7D5B':'#2A7050');
+    });
+    return{back:s,front:''};
+  },
+  sansevieria(r){
+    let s='';
+    [[-34,-30,58],[34,27,60],[-22,-17,92],[22,16,86],[-10,-7,112],[10,6,104],[0,0,122]].forEach(([x,a,len])=>{
+      s+=L(100+x*.5,166,a+(r()-.5)*4,len,8.5+r()*2,'#2B6A4E','#9CCB86','#C3DC84');
+    });
+    return{back:s,front:''};
+  },
+  zz(r){
+    let s='';
+    [[-52,64],[-30,86],[-8,98],[14,92],[34,78],[54,58]].forEach(([a,h])=>{
+      const[tx,ty]=tip(a,h), p1=[100+(tx-100)*.1,164-h*.55];
+      s+=stem([100,164],p1,[tx,ty],'#5C7A4A',3);
+      for(let i=1;i<=6;i++){
+        const t=i/6.2, pt=quad([100,164],p1,[tx,ty],t), sz=22-t*6;
+        s+=L(pt.x,pt.y,pt.a-58,sz,7,'#245F45','#4D9A74')+L(pt.x,pt.y,pt.a+58,sz,7,'#2A6B4E','#4D9A74');
+      }
+      const e=quad([100,164],p1,[tx,ty],1);
+      s+=L(e.x,e.y,e.a,16,6,'#2A6B4E');
+    });
+    return{back:s,front:''};
+  },
+  spider(r){
+    let s='';const n=15;
+    const outs=[...Array(n)].map((_,i)=>-1+2*i/(n-1)+(r()-.5)*.12).sort((a,b)=>Math.abs(b)-Math.abs(a));
+    outs.forEach(o=>{
+      const p0=[100+o*6,164],p1=[100+o*30,164-92+Math.abs(o)*10],p2=[100+o*70,164-104+Math.abs(o)*100+(r()-.5)*8];
+      s+=stem(p0,p1,p2,'#4E9B6B',6)+`<path d="${q(p0,p1,p2)}" stroke="#E4EFB4" stroke-width="2" fill="none" stroke-linecap="round" opacity=".9"/>`;
+    });
+    return{back:s,front:''};
+  },
+  pothos(r){
+    let back='',front='';
+    [[-34,44],[-12,60],[10,66],[30,48]].forEach(([a,h],i)=>{
+      const[tx,ty]=tip(a,h),p1=[100+(tx-100)*.1,164-h*.6];
+      back+=stem([100,164],p1,[tx,ty],'#2F6B4A',2.2);
+      back+=L(tx,ty,a*1.4,28,12,i%2?'#3E9564':'#A9CF5F','#1F5A41');
+      const m=quad([100,164],p1,[tx,ty],.55);
+      back+=L(m.x,m.y,a-70,22,10,i%2?'#A9CF5F':'#3E9564')+L(m.x,m.y,a+70,22,10,i%2?'#3E9564':'#A9CF5F');
+    });
+    [[[80,162],[34,166],[38,224]],[[122,162],[168,166],[164,216]],[[96,166],[82,190],[90,216]]].forEach((v,j)=>{
+      front+=stem(v[0],v[1],v[2],'#2F6B4A',2.2);
+      for(let k=1;k<=6;k++){
+        const t=k/6.3,pt=quad(v[0],v[1],v[2],t);
+        front+=L(pt.x,pt.y,pt.a+(k%2?55:-55),22-t*3,10,(k+j)%2?'#3E9564':'#A9CF5F','#1F5A41');
+      }
+    });
+    return{back,front};
+  },
+  fern(r){
+    let s='';const n=9;
+    const outs=[...Array(n)].map((_,i)=>-1+2*i/(n-1)+(r()-.5)*.1).sort((a,b)=>Math.abs(b)-Math.abs(a));
+    outs.forEach((o,j)=>{
+      const p0=[100+o*5,164],p1=[100+o*42,164-96+Math.abs(o)*14],p2=[100+o*80,164-62+Math.abs(o)*42];
+      s+=`<path d="${q(p0,p1,p2)}" stroke="#2F6B4A" stroke-width="1.8" fill="none"/>`;
+      const c=j%2?'#4FA36C':'#3F8C5A';
+      for(let t=.14;t<=1.001;t+=.09){
+        const pt=quad(p0,p1,p2,t),len=19-t*11;
+        s+=L(pt.x,pt.y,pt.a-68,len,3.6,c)+L(pt.x,pt.y,pt.a+68,len,3.6,c);
+      }
+    });
+    return{back:s,front:''};
+  },
+  fiddle(r){
+    let s=`<path d="M100 166Q97 120 101 70" stroke="#6B4F3A" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+    for(let i=0;i<7;i++){
+      const y=150-i*12.5,x=100-i*.4,side=i%2?1:-1;
+      s+=L(x,y,side*(64-i*4)+(r()-.5)*6,46-i*2.6,19-i*.6,i%3?'#2F7D4F':'#3B8A57','#A5D8AE');
+    }
+    s+=L(101,74,(r()-.5)*10,30,13,'#3B8A57','#A5D8AE');
+    return{back:s,front:''};
+  },
+  rosette(r){
+    let s='<g transform="translate(100 140) scale(1 .8) translate(-100 -140)">';
+    [[11,42,14,'#7FAF9E','#E5A6BA'],[9,32,12,'#93C0AE','#E9B7C6'],[7,22,10,'#ABD0BF',null],[5,12,7,'#C6E1D2',null]].forEach(([n,len,wid,fill,edge])=>{
+      const off=r()*30;
+      for(let i=0;i<n;i++)s+=L(100,140,off+i*360/n,len,wid,fill,null,edge);
+    });
+    return{back:s+'</g>',front:''};
+  },
+  cactus(r){
+    const c='#3F8A5F';let sp='';
+    [100,114,128,142,156].forEach((y,i)=>{
+      [90,100,110].forEach((x,j)=>{
+        if((i+j)%2===0){const xx=x+(r()-.5)*3;sp+=`M${f1(xx-2)} ${y-2}L${f1(xx+2)} ${y+2}M${f1(xx+2)} ${y-2}L${f1(xx-2)} ${y+2}`}
+      });
+    });
+    const s=`<g stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M88 142H66V112" stroke="${c}" stroke-width="17"/>
+      <path d="M112 128H134V100" stroke="${c}" stroke-width="17"/>
+      <path d="M100 168V94" stroke="${c}" stroke-width="40"/>
+      <path d="M90 168V96M100 168V86M110 168V96" stroke="#6DB88B" stroke-width="1.6" opacity=".6"/>
+      <path d="${sp}" stroke="#F3F0D2" stroke-width="1.2"/>
+    </g>
+    <circle cx="100" cy="72" r="7" fill="#F08FA8"/><circle cx="100" cy="72" r="3" fill="#F7D56B"/>`;
+    return{back:s,front:''};
+  },
+  aloe(r){
+    let s='';
+    [-66,66,-48,48,-30,30,-14,14,0].forEach(a=>{
+      const len=84-Math.abs(a)*.5+(r()-.5)*6,x=100+a*.15;
+      s+=L(x,166,a,len,14,'#5E9F86','#8FC4AB','#BADBC9');
+      s+=`<g transform="translate(${f1(x)} 166) rotate(${a})">`+[.25,.4,.55,.7].map(k=>`<circle cx="${f1((r()-.5)*8)}" cy="${f1(-len*k)}" r="1.3" fill="#DDEFE3"/>`).join('')+'</g>';
+    });
+    return{back:s,front:''};
+  },
+  calathea(r){
+    let s='';
+    [[-52,52],[52,50],[-30,74],[32,70],[-10,92],[12,84],[0,60]].forEach(([a,h])=>{
+      const[tx,ty]=tip(a,h);
+      s+=stem([100,164],[100+(tx-100)*.2,164-h*.6],[tx,ty],'#7A3B5A',2.4);
+      const len=48,wid=19;let st='';
+      [.2,.38,.56,.74].forEach(k=>[-1,1].forEach(sd=>{st+=`<path d="M0 ${f1(-len*k)}L${f1(sd*wid*.62)} ${f1(-len*k-9)}" stroke="#9BD3A6" stroke-width="1.6" stroke-linecap="round" opacity=".85"/>`}));
+      s+=L(tx,ty,a*1.1+(r()-.5)*8,len,wid,'#2D6A4F','#9BD3A6','#6A2C5E',st);
+    });
+    return{back:s,front:''};
+  },
+  pilea(r){
+    const st=[];
+    for(let i=0;i<11;i++){
+      const a=-72+i*14.4+(r()-.5)*8,h=(86-Math.abs(a)*.5)+(r()-.5)*12,[tx,ty]=tip(a,h);
+      st.push({a,h,tx,ty});
+    }
+    st.sort((m,n)=>m.ty-n.ty);
+    let s='';
+    st.forEach((o,i)=>{
+      s+=stem([100,164],[100+(o.tx-100)*.15,164-o.h*.6],[o.tx,o.ty],'#6AA879',1.8);
+      s+=`<ellipse cx="${f1(o.tx)}" cy="${f1(o.ty)}" rx="15" ry="14" fill="${i%2?'#4FAE74':'#5DB67A'}"/><ellipse cx="${f1(o.tx)}" cy="${f1(o.ty)}" rx="10" ry="9" fill="#A6E0B5" opacity=".28"/><circle cx="${f1(o.tx)}" cy="${f1(o.ty)}" r="2" fill="#A6E0B5"/>`;
+    });
+    return{back:s,front:''};
+  }
+};
+
+function pot(color){
+  const dark=mix(color,'#000000',.24),light=mix(color,'#FFFFFF',.22);
+  return`<ellipse cx="100" cy="236" rx="58" ry="5" fill="#000" opacity=".12"/>
+  <path d="M54 174H146L137 227Q136 234 129 234H71Q64 234 63 227Z" fill="${color}"/>
+  <path d="M112 174H146L137 227Q136 234 129 234H108Z" fill="${dark}" opacity=".35"/>
+  <rect x="46" y="158" width="108" height="19" rx="5" fill="${light}"/>
+  <rect x="46" y="170" width="108" height="7" rx="3" fill="${dark}" opacity=".18"/>`;
+}
+function illustration(p,potColor){
+  const parts=PLANTS[p.type](rnd(p.seed));
+  const s={S:.8,M:.9,L:1}[p.size];
+  const pn=POTS.find(x=>x.c===potColor);
+  return`<svg viewBox="0 0 200 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${p.name} в горшке ${pn?pn.n:''}"><g transform="translate(100 236) scale(${s}) translate(-100 -236)">${parts.back}${pot(potColor)}${parts.front}</g></svg>`;
+}
+
+/* ---------- toast ---------- */
+let tt;
+function toast(msg){
+  const t=$('#toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2400);
+}
+
+/* ---------- cart state ---------- */
+let cart=[];
+try{
+  const raw=JSON.parse(localStorage.getItem('listva-cart')||'[]');
+  if(Array.isArray(raw))cart=raw.filter(i=>i&&PBY[i.id]&&POTS.some(p=>p.k===i.pot)&&Number.isInteger(i.qty)&&i.qty>0&&i.qty<100);
+}catch(e){cart=[]}
+const save=()=>{try{localStorage.setItem('listva-cart',JSON.stringify(cart))}catch(e){}};
+const countAll=()=>cart.reduce((s,i)=>s+i.qty,0);
+function updateBadge(){
+  const n=countAll(),c=$('#count');
+  c.textContent=n;c.hidden=n===0;
+  $('#open-cart').setAttribute('aria-label',n?`Открыть корзину, товаров: ${n}`:'Открыть корзину');
+}
+function addToCart(id,potKey){
+  const it=cart.find(i=>i.id===id&&i.pot===potKey);
+  if(it)it.qty=Math.min(99,it.qty+1);else cart.push({id,pot:potKey,qty:1});
+  save();updateBadge();
+  toast(`Добавлено в корзину: ${PBY[id].name}, горшок «${potBy(potKey).n}»`);
+}
+function totals(){
+  const sub=cart.reduce((s,i)=>s+PBY[i.id].price*i.qty,0);
+  const ship=sub===0||sub>=FREE?0:SHIP;
+  return{sub,ship,total:sub+ship};
+}
+
+/* ---------- configurator ---------- */
+function mountConf(root,p,opt={}){
+  let potKey=p.pot;
+  const H=opt.h||'h2';
+  const facts=opt.facts?`<dl class="facts">
+    <dt>Свет</dt><dd>${LIGHT[p.light]}</dd>
+    <dt>Высота</dt><dd>${p.h}</dd>
+    <dt>Полив</dt><dd>${p.care}</dd>
+    <dt>Питомцы</dt><dd>${p.petsText}</dd></dl>`:'';
+  root.innerHTML=`<div class="conf${opt.wide?' wide':''}">
+    <div class="stage"><div class="art"></div></div>
+    <div class="panel">
+      <div><${H} class="p-name"${opt.titleId?` id="${opt.titleId}"`:''}>${p.name}</${H}><p class="latin">${p.latin}</p></div>
+      <p class="blurb">${p.blurb}</p>
+      ${facts}
+      <fieldset class="swatches"><legend>Горшок: <strong class="pot-name"></strong></legend>
+        <div class="sw-row">${POTS.map(x=>`<button type="button" class="sw" style="--c:${x.c}" data-k="${x.k}" aria-label="${x.n}" aria-pressed="false"></button>`).join('')}</div>
+      </fieldset>
+      <div class="buy"><span class="price">${fmt(p.price)}</span><button type="button" class="btn add">В корзину</button></div>
+    </div></div>`;
+  const stage=$('.stage',root),art=$('.art',root),nm=$('.pot-name',root);
+  const paint=()=>{
+    const pt=potBy(potKey);
+    stage.style.setProperty('--pot',pt.c);
+    art.innerHTML=illustration(p,pt.c);
+    nm.textContent=pt.n;
+    root.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.k===potKey)));
+  };
+  $('.sw-row',root).addEventListener('click',e=>{
+    const b=e.target.closest('.sw');if(!b)return;
+    potKey=b.dataset.k;paint();
+  });
+  $('.add',root).addEventListener('click',()=>{
+    if(opt.closeOnAdd)$('#detail').close();
+    addToCart(p.id,potKey);
+  });
+  paint();
+}
+
+/* ---------- catalog ---------- */
+const state={light:'any',pets:false,q:'',sort:'pop'};
+const CHIPS=[['any','Любой свет'],['shade','Тень'],['part','Полутень'],['sun','Яркий свет']];
+function renderChips(){
+  $('#chips').innerHTML=CHIPS.map(([k,n])=>`<button type="button" class="chip" data-light="${k}" aria-pressed="${state.light===k}">${n}</button>`).join('');
+}
+function renderGrid(){
+  let list=PRODUCTS.filter(p=>(state.light==='any'||p.light===state.light)&&(!state.pets||p.pets)&&(!state.q||(p.name+' '+p.latin).toLowerCase().includes(state.q)));
+  if(state.sort==='asc')list=[...list].sort((a,b)=>a.price-b.price);
+  if(state.sort==='desc')list=[...list].sort((a,b)=>b.price-a.price);
+  $('#found').textContent=`Найдено: ${list.length} из ${PRODUCTS.length}`;
+  if(!list.length){
+    $('#grid').innerHTML=`<div class="empty"><p>Ничего не нашлось. Попробуйте другое название или снимите фильтры.</p><button type="button" class="btn ghost small" data-reset>Сбросить фильтры</button></div>`;
+    return;
+  }
+  $('#grid').innerHTML=list.map(p=>{
+    const pt=potBy(p.pot);
+    return`<article class="card">
+      <button type="button" class="card-media" style="--pot:${pt.c}" data-open="${p.id}" aria-label="Подробнее: ${p.name}">${illustration(p,pt.c)}</button>
+      <div class="card-body">
+        <h3>${p.name}</h3><p class="latin">${p.latin}</p>
+        <ul class="tags"><li>${LIGHT[p.light]}</li><li>${p.h}</li>${p.pets?'<li class="pet">Безопасно для питомцев</li>':''}</ul>
+        <div class="card-foot"><span class="price">${fmt(p.price)}</span><button type="button" class="btn small" data-add="${p.id}">В корзину</button></div>
+      </div></article>`;
+  }).join('');
+}
+$('#chips').addEventListener('click',e=>{
+  const b=e.target.closest('[data-light]');if(!b)return;
+  state.light=b.dataset.light;renderChips();renderGrid();
+});
+$('#pets').addEventListener('change',e=>{state.pets=e.target.checked;renderGrid()});
+$('#q').addEventListener('input',e=>{state.q=e.target.value.trim().toLowerCase();renderGrid()});
+$('#sort').addEventListener('change',e=>{state.sort=e.target.value;renderGrid()});
+$('#grid').addEventListener('click',e=>{
+  const o=e.target.closest('[data-open]'),a=e.target.closest('[data-add]');
+  if(e.target.closest('[data-reset]')){
+    state.light='any';state.pets=false;state.q='';state.sort='pop';
+    $('#pets').checked=false;$('#q').value='';$('#sort').value='pop';
+    renderChips();renderGrid();return;
+  }
+  if(o){
+    const p=PBY[o.dataset.open];
+    mountConf($('#detail-body'),p,{wide:true,facts:true,titleId:'d-title',closeOnAdd:true});
+    $('#detail').showModal();
+    $('#detail-body').scrollTop=0;
+  }
+  if(a){const p=PBY[a.dataset.add];addToCart(p.id,p.pot)}
+});
+
+/* ---------- dialogs ---------- */
+const detail=$('#detail'),cartDlg=$('#cart');
+$('#detail-close').addEventListener('click',()=>detail.close());
+[detail,cartDlg].forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.close()}));
+
+let view='cart',orderNo=0;
+function renderCart(){
+  const body=$('#cart-body');
+  if(view==='done'){
+    body.innerHTML=`<div class="cart-msg"><h3>Заказ №${orderNo} принят</h3><p>Это демо-витрина: данные никуда не отправлены, оплата не списана.</p><button type="button" class="btn" data-act="close">Продолжить покупки</button></div>`;
+    return;
+  }
+  if(!cart.length){
+    body.innerHTML=`<div class="cart-msg"><h3>В корзине пока пусто</h3><p>Выберите растение в каталоге. Горшок к нему можно подобрать по цвету.</p><button type="button" class="btn" data-act="close">Перейти в каталог</button></div>`;
+    return;
+  }
+  const t=totals();
+  if(view==='checkout'){
+    body.innerHTML=`<form id="order" class="lines checkout">
+      <h3>Данные для доставки</h3>
+      <label class="field"><span>Имя</span><input name="name" required autocomplete="name"></label>
+      <label class="field"><span>Телефон</span><input name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="+7"></label>
+      <label class="field"><span>Адрес доставки</span><input name="address" required autocomplete="street-address"></label>
+      <p class="note">Демо-витрина: данные не отправляются.</p>
+    </form>
+    <div class="sum">
+      <dl class="totals"><div><dt>Доставка</dt><dd>${t.ship?fmt(t.ship):'Бесплатно'}</dd></div><div class="grand"><dt>Итого</dt><dd>${fmt(t.total)}</dd></div></dl>
+      <button type="submit" form="order" class="btn wide">Подтвердить заказ</button>
+      <button type="button" class="link" data-act="back">Назад в корзину</button>
+    </div>`;
+    return;
+  }
+  const left=FREE-t.sub;
+  body.innerHTML=`<ul class="lines">${cart.map((it,i)=>{
+    const p=PBY[it.id],pt=potBy(it.pot);
+    return`<li class="line">
+      <div class="thumb" style="--pot:${pt.c}">${illustration(p,pt.c)}</div>
+      <div><p class="line-name">${p.name}</p><p class="line-sub">Горшок: ${pt.n}</p>
+        <div class="qty"><button type="button" data-act="dec" data-i="${i}" aria-label="Уменьшить количество: ${p.name}">−</button><span>${it.qty}</span><button type="button" data-act="inc" data-i="${i}" aria-label="Увеличить количество: ${p.name}">+</button></div></div>
+      <div class="line-end"><span class="line-price">${fmt(p.price*it.qty)}</span><button type="button" class="link" data-act="rm" data-i="${i}">Убрать</button></div>
+    </li>`;
+  }).join('')}</ul>
+  <div class="sum">
+    ${left>0?`<p class="ship-note">До бесплатной доставки осталось ${fmt(left)}</p>`:`<p class="ship-note ok">Доставка бесплатная</p>`}
+    <div class="bar-track"><div class="bar-fill" style="width:${Math.min(100,t.sub/FREE*100)}%"></div></div>
+    <dl class="totals"><div><dt>Растения</dt><dd>${fmt(t.sub)}</dd></div><div><dt>Доставка</dt><dd>${t.ship?fmt(t.ship):'Бесплатно'}</dd></div><div class="grand"><dt>Итого</dt><dd>${fmt(t.total)}</dd></div></dl>
+    <button type="button" class="btn wide" data-act="checkout">Оформить заказ</button>
+  </div>`;
+}
+function openCart(){view='cart';renderCart();cartDlg.showModal()}
+$('#open-cart').addEventListener('click',openCart);
+cartDlg.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;
+  const act=b.dataset.act,i=+b.dataset.i;
+  if(act==='close'){
+    const wasEmpty=view==='done'||!cart.length;
+    cartDlg.close();view='cart';
+    if(wasEmpty)$('#catalog').scrollIntoView();
+    return;
+  }
+  if(act==='checkout'){view='checkout'}
+  if(act==='back'){view='cart'}
+  if(act==='inc'&&cart[i])cart[i].qty=Math.min(99,cart[i].qty+1);
+  if(act==='dec'&&cart[i]){cart[i].qty-=1;if(cart[i].qty<1)cart.splice(i,1)}
+  if(act==='rm'&&cart[i])cart.splice(i,1);
+  save();updateBadge();renderCart();
+});
+cartDlg.addEventListener('submit',e=>{
+  if(e.target.id!=='order')return;
+  e.preventDefault();
+  orderNo=1000+Math.floor(Math.random()*9000);
+  cart=[];save();updateBadge();view='done';renderCart();
+});
+
+/* ---------- boot ---------- */
+mountConf($('#hero-conf'),PBY.monstera,{h:'h2'});
+renderChips();renderGrid();updateBadge();
+})();
+</script>
+</body>
+</html>
